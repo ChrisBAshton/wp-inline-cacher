@@ -13,7 +13,7 @@ function inline_cacher_logic( $html, $handle, $href, $media ) {
       // (which could otherwise open us up to attacks by putting `</style>...`
       // in the referenced CSS)
       $inline_css = str_replace("<", "", file_get_contents($href));
-      return '<style data-src="' . $href . '" data-inline-cache="' . $version . '">' . $inline_css . '</style>';
+      return '<style data-src="' . $href . '" data-version="' . $version . '">' . $inline_css . '</style>';
     }
   }
   return $html;

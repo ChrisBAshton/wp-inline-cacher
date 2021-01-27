@@ -25,11 +25,11 @@
     // @TODO - only run this step if service worker successfully installs
     var stylesheetsToCache = [];
     Array.from(document.getElementsByTagName("style")).forEach(function (stylesheet) {
-      if (stylesheet.getAttribute("data-src") && stylesheet.getAttribute("data-inline-cache")) {
+      if (stylesheet.getAttribute("data-src") && stylesheet.getAttribute("data-version")) {
         console.log("Found a stylesheet to cache", stylesheet);
         stylesheetsToCache.push({
           url: stylesheet.getAttribute("data-src"),
-          hash: stylesheet.getAttribute("data-inline-cache"),
+          version: stylesheet.getAttribute("data-version"),
           value: stylesheet.innerText.trim(),
         });
       }
@@ -61,7 +61,7 @@
       // update the cookie, so the server knows what's cached locally
       var cookie = JSON.parse(getCookie("inline-cacher") || "{}");
       stylesheetsToCache.forEach(function(stylesheet) {
-        cookie[stylesheet.url] = stylesheet.hash;
+        cookie[stylesheet.url] = stylesheet.version;
       });
       document.cookie = "inline-cacher=" + JSON.stringify(cookie);
 

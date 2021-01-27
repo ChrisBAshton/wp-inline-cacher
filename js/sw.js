@@ -1,11 +1,7 @@
-self.addEventListener('install', function (event) {
-  console.log("sw.js install callback");
-});
-
 let manifest = false;
 const getManifest = async () => {
   if (manifest) { return manifest; }
-  const originalManifest = await fetchFromCache("manifest"); // { "url": "hash", ...etc }
+  const originalManifest = await fetchFromCache("manifest"); // { "url": "version", ...etc }
   manifest = Object.keys(JSON.parse(originalManifest));
 }
 
